@@ -2,9 +2,9 @@ import React from "react";
 import View from "./View";
 import { useViewModel } from "./viewModal";
 
-const Home = () => {
+const Main = () => {
   const viewModelProps = useViewModel();
   return <View {...viewModelProps} />;
 };
 
-export default Home;
+export default Main;
