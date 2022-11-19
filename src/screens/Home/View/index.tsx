@@ -19,6 +19,7 @@ const Home = ({
         setSearchedHash={setSearchedHash}
         clicked={clicked}
         setClicked={setClicked}
+        activeTab={activeTab}
       />
     </View>
   );
