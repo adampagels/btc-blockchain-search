@@ -7,7 +7,7 @@ export const getAddressByHash = async (hashAddress: string) => {
   const addressUrl = `${API_URL}/address/${hashAddress}`;
   try {
     const fetchedAddress = await axios.get(addressUrl);
-    return fetchedAddress;
+    return fetchedAddress.data.data;
   } catch (error: any) {
     return { error: error.response.data };
   }
@@ -18,7 +18,7 @@ export const getTransactionByHash = async (hashTransaction: string) => {
   const transactionUrl = `${API_URL}/tx/${hashTransaction}?verbose=3`;
   try {
     const fetchedTransaction = await axios.get(transactionUrl);
-    return fetchedTransaction;
+    return fetchedTransaction.data.data;
   } catch (error: any) {
     return { error: error.response.data };
   }

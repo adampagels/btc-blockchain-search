@@ -2,6 +2,8 @@ import { View } from "react-native";
 import SearchInput from "../../../components/SearchInput/View";
 import SearchToggle from "../../../components/SearchToggle/View";
 import { HomeViewProps } from "../types";
+import AddressCard from "../../../components/AddressCard/View";
+import TransactionCard from "../../../components/TransactionCard/View";
 
 const Home = ({
   searchedHash,
@@ -11,6 +13,7 @@ const Home = ({
   activeTab,
   setActiveTab,
   searchByHash,
+  searchResults,
 }: HomeViewProps) => {
   return (
     <View>
@@ -23,6 +26,11 @@ const Home = ({
         activeTab={activeTab}
         searchByHash={searchByHash}
       />
+      {activeTab === "address" ? (
+        <AddressCard searchResults={searchResults} />
+      ) : (
+        <TransactionCard searchResults={searchResults} />
+      )}
     </View>
   );
 };
