@@ -1,5 +1,10 @@
+import { useState } from "react";
+
 const useViewModel = () => {
-  return {};
+  const [searchedHash, setSearchedHash] = useState<string>("");
+  const [clicked, setClicked] = useState<boolean>(false);
+
+  return { clicked, setClicked, searchedHash, setSearchedHash };
 };
 
 export { useViewModel };
