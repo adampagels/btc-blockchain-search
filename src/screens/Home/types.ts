@@ -5,4 +5,6 @@ export type HomeViewProps = {
   setClicked: () => Promise<void>;
   activeTab: string;
   setActiveTab: () => Promise<void>;
+  searchByHash: () => Promise<void>;
+  searchResults: [];
 };

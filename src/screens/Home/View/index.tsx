@@ -10,6 +10,7 @@ const Home = ({
   setClicked,
   activeTab,
   setActiveTab,
+  searchByHash,
 }: HomeViewProps) => {
   return (
     <View>
@@ -20,6 +21,7 @@ const Home = ({
         clicked={clicked}
         setClicked={setClicked}
         activeTab={activeTab}
+        searchByHash={searchByHash}
       />
     </View>
   );

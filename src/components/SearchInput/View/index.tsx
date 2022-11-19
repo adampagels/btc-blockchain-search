@@ -2,7 +2,6 @@ import React from "react";
 import { TextInput, View, Keyboard, Button } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 import { SearchInputProps } from "../types";
-import { searchByHash } from "../../../service/dataService";
 import styles from "../styles";
 
 const SearchInput = ({
@@ -11,6 +10,7 @@ const SearchInput = ({
   setSearchedHash,
   setClicked,
   activeTab,
+  searchByHash,
 }: SearchInputProps) => {
   return (
     <>
@@ -67,7 +67,7 @@ const SearchInput = ({
       <Button
         title="Search"
         onPress={() => {
-          searchByHash(activeTab, searchedHash);
+          searchByHash(searchedHash);
         }}
       ></Button>
     </>

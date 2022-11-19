@@ -4,4 +4,5 @@ export type SearchInputProps = {
   clicked: string;
   setClicked: (isClicked: boolean) => Promise<void>;
   activeTab: string;
+  searchByHash: (hash: string) => Promise<void>;
 };
