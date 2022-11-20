@@ -18,6 +18,7 @@ const Home = ({
   setCurrency,
   currency,
   conversionRates,
+  showToast,
 }: HomeViewProps) => {
   return (
     <View>
@@ -36,6 +37,7 @@ const Home = ({
           searchResults={searchResults}
           currency={currency}
           conversionRates={conversionRates}
+          showToast={showToast}
         />
       ) : (
         <TransactionCard

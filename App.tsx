@@ -1,12 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import Home from "./src/screens/Home";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Home />
       <StatusBar style="auto" />
+      <Toast />
     </View>
   );
 }

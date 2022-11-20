@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 import { AddressCardProps } from "../types";
 import styles from "../../../styles/globalStyles";
 
@@ -6,8 +6,15 @@ const AddressCard = ({
   searchResults,
   currency,
   conversionRates,
+  showToast,
 }: AddressCardProps) => {
-  let { received, sent, balance, unspent_tx_count: unspent } = searchResults;
+  let {
+    received,
+    sent,
+    balance,
+    unspent_tx_count: unspent,
+    address,
+  } = searchResults;
   const { USD, EUR } = conversionRates;
   if (currency === "EUR") {
     received *= EUR;
@@ -30,6 +37,7 @@ const AddressCard = ({
         <Text>BTC Sent: {sent / 10000000}</Text>
         <Text>BTC Unspent: {unspent}</Text>
         <Text>Balance: {balance / 10000000}</Text>
+        <Button title="Subscribe" onPress={() => showToast(address)} />
       </View>
     </View>
   );

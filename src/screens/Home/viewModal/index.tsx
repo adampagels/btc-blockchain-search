@@ -4,6 +4,7 @@ import {
   getTransactionByHash,
 } from "../../../service/dataService";
 import { updateConversionRates } from "../../../helpers/helpers";
+import Toast from "react-native-toast-message";
 
 const useViewModel = () => {
   const [searchedHash, setSearchedHash] = useState<string>("");
@@ -17,6 +18,14 @@ const useViewModel = () => {
     activeTab === "address"
       ? setSearchResults(await getAddressByHash(hash))
       : setSearchResults(await getTransactionByHash(hash));
+  };
+
+  const showToast = (address: string) => {
+    Toast.show({
+      type: "success",
+      text1: "Confirmed Subscription!",
+      text2: `${address}`,
+    });
   };
 
   useEffect(() => {
@@ -39,6 +48,7 @@ const useViewModel = () => {
     currency,
     setConversionRates,
     conversionRates,
+    showToast,
   };
 };
 

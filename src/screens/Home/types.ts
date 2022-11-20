@@ -11,4 +11,5 @@ export type HomeViewProps = {
   currency: string;
   conversionRates: {};
   setConversionRates: () => Promise<void>;
+  showToast: () => Promise<void>;
 };
