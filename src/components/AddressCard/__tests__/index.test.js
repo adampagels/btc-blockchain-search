@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react-native";
 import AddressCard from "..";
 
-describe("TransactionCard", () => {
+describe("AddressCard", () => {
   const mockShowToast = jest.fn();
   let received;
   let sent;
