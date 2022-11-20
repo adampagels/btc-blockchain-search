@@ -24,7 +24,7 @@ describe("SearchToggle", () => {
     fireEvent.press(transactionButtonToggle);
     expect(mockSetActiveTab).toHaveBeenCalled();
 
-    const addressButtonToggle = screen.getByText("transaction");
+    const addressButtonToggle = screen.getByText("address");
     fireEvent.press(addressButtonToggle);
     expect(mockSetActiveTab).toHaveBeenCalled();
   });
