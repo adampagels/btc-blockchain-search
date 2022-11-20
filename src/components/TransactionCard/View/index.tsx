@@ -17,6 +17,7 @@ const TransactionCard = ({
     hash,
   } = searchResults;
   const { USD, EUR } = conversionRates;
+
   if (currency === "EUR") {
     inputs_value *= EUR;
     outputs_value *= EUR;
@@ -30,7 +31,7 @@ const TransactionCard = ({
   }
 
   return (
-    <View style={[styles.card, styles.shadowProp]}>
+    <View style={[styles.card, styles.shadowProp]} testID="transaction-card">
       <View style={styles.card}>
         <Text>Hash: {hash}</Text>
         <Text>Received at: {receivedTime}</Text>
