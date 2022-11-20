@@ -16,6 +16,7 @@ const AddressCard = ({
     address,
   } = searchResults;
   const { USD, EUR } = conversionRates;
+
   if (currency === "EUR") {
     received *= EUR;
     sent *= EUR;
@@ -31,7 +32,7 @@ const AddressCard = ({
   }
 
   return (
-    <View style={[styles.card, styles.shadowProp]}>
+    <View style={[styles.card, styles.shadowProp]} testID="address-card">
       <View style={styles.card}>
         <Text>BTC Received: {received / 10000000}</Text>
         <Text>BTC Sent: {sent / 10000000}</Text>
