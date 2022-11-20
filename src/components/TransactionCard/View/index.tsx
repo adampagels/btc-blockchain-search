@@ -2,8 +2,12 @@ import { View, Text } from "react-native";
 import { TransactionCardProps } from "../types";
 import styles from "../../../styles/globalStyles";
 
-const TransactionCard = ({ searchResults }) => {
-  const {
+const TransactionCard = ({
+  searchResults,
+  currency,
+  conversionRates,
+}: TransactionCardProps) => {
+  let {
     created_at: receivedTime,
     size,
     confirmations,
@@ -12,7 +16,19 @@ const TransactionCard = ({ searchResults }) => {
     fee,
     hash,
   } = searchResults;
-  console.log(searchResults);
+  const { USD, EUR } = conversionRates;
+  if (currency === "EUR") {
+    inputs_value *= EUR;
+    outputs_value *= EUR;
+    fee *= EUR;
+  }
+
+  if (currency === "USD") {
+    inputs_value *= USD;
+    outputs_value *= USD;
+    fee *= USD;
+  }
+
   return (
     <View style={[styles.card, styles.shadowProp]}>
       <View style={styles.card}>
@@ -28,5 +44,3 @@ const TransactionCard = ({ searchResults }) => {
   );
 };
 export default TransactionCard;
-
-// 10 MILLION

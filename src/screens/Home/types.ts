@@ -7,4 +7,8 @@ export type HomeViewProps = {
   setActiveTab: () => Promise<void>;
   searchByHash: () => Promise<void>;
   searchResults: [];
+  setCurrency: () => Promise<void>;
+  currency: string;
+  conversionRates: {};
+  setConversionRates: () => Promise<void>;
 };

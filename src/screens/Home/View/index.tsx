@@ -4,6 +4,7 @@ import SearchToggle from "../../../components/SearchToggle/View";
 import { HomeViewProps } from "../types";
 import AddressCard from "../../../components/AddressCard/View";
 import TransactionCard from "../../../components/TransactionCard/View";
+import CurrencySelect from "../../../components/CurrencySelect/View";
 
 const Home = ({
   searchedHash,
@@ -14,6 +15,9 @@ const Home = ({
   setActiveTab,
   searchByHash,
   searchResults,
+  setCurrency,
+  currency,
+  conversionRates,
 }: HomeViewProps) => {
   return (
     <View>
@@ -26,10 +30,19 @@ const Home = ({
         activeTab={activeTab}
         searchByHash={searchByHash}
       />
+      <CurrencySelect setCurrency={setCurrency} currency={currency} />
       {activeTab === "address" ? (
-        <AddressCard searchResults={searchResults} />
+        <AddressCard
+          searchResults={searchResults}
+          currency={currency}
+          conversionRates={conversionRates}
+        />
       ) : (
-        <TransactionCard searchResults={searchResults} />
+        <TransactionCard
+          searchResults={searchResults}
+          currency={currency}
+          conversionRates={conversionRates}
+        />
       )}
     </View>
   );

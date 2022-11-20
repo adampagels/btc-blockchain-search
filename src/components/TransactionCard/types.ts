@@ -1,1 +1,5 @@
-export type TransactionCardProps = {};
+export type TransactionCardProps = {
+  searchResults: any;
+  conversionRates: {};
+  currency: string;
+};
