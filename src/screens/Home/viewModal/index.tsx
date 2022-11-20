@@ -29,10 +29,14 @@ const useViewModel = () => {
   };
 
   useEffect(() => {
-    setConversionRates((prevState) => ({
-      ...prevState,
-      ...updateConversionRates(),
-    }));
+    const getConversionRates = async () => {
+      const { USD, EUR } = await updateConversionRates();
+      setConversionRates((prevState) => ({
+        ...prevState,
+        ...{ USD, EUR },
+      }));
+    };
+    getConversionRates();
   }, []);
 
   return {
