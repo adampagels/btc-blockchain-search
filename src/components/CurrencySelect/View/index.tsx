@@ -9,6 +9,7 @@ const CurrencySelect = ({ setCurrency, currency }: CurrencySelectProps) => {
       <Picker
         selectedValue={currency}
         onValueChange={(itemValue, itemIndex) => setCurrency(itemValue)}
+        testID="currency-picker"
       >
         <Picker.Item label="BTC" value="BTC" />
         <Picker.Item label="USD" value="USD" />
