@@ -1,7 +1,7 @@
 import { Button, View } from "react-native";
 import { SearchToggleProps } from "../types";
 
-const SearchToggle = ({ activeTab, setActiveTab }: SearchToggleProps) => {
+const SearchToggle = ({ setActiveTab }: SearchToggleProps) => {
   return (
     <View>
       <Button title="address" onPress={() => setActiveTab("address")} />

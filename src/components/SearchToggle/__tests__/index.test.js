@@ -1,0 +1,31 @@
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react-native";
+import SearchToggle from "..";
+
+describe("SearchToggle", () => {
+  const mockSetActiveTab = jest.fn();
+  // let textInput;
+  beforeEach(() => {
+    render(
+      <SearchToggle activeTab="address" setActiveTab={mockSetActiveTab} />
+    );
+  });
+
+  it("should render two buttons", () => {
+    const addressButtonToggle = screen.getByText("address");
+    expect(addressButtonToggle);
+
+    const transactionButtonToggle = screen.getByText("transaction");
+    expect(transactionButtonToggle);
+  });
+
+  it("should register buttons being pressed", () => {
+    const transactionButtonToggle = screen.getByText("transaction");
+    fireEvent.press(transactionButtonToggle);
+    expect(mockSetActiveTab).toHaveBeenCalled();
+
+    const addressButtonToggle = screen.getByText("transaction");
+    fireEvent.press(addressButtonToggle);
+    expect(mockSetActiveTab).toHaveBeenCalled();
+  });
+});
