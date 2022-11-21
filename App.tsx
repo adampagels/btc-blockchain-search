@@ -4,9 +4,11 @@ import Home from "./src/screens/Home";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 export default function App() {
+  const blockchainSocket = new WebSocket("wss://ws.blockchain.info/inv");
+
   return (
     <View style={styles.container}>
-      <Home />
+      <Home blockchainSocket={blockchainSocket} />
       <StatusBar style="auto" />
       <Toast />
     </View>

@@ -2,8 +2,8 @@ import React from "react";
 import View from "./View";
 import { useViewModel } from "./viewModal";
 
-const Main = () => {
-  const viewModelProps = useViewModel();
+const Main = ({ blockchainSocket }) => {
+  const viewModelProps = useViewModel({ blockchainSocket });
   return <View {...viewModelProps} />;
 };
 

@@ -10,7 +10,7 @@ import {
   getTopTransactions,
 } from "../../../helpers/firebaseHelpers";
 
-const useViewModel = () => {
+const useViewModel = ({ blockchainSocket }) => {
   const [searchedHash, setSearchedHash] = useState<string>("");
   const [clicked, setClicked] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>("address");
@@ -19,6 +19,7 @@ const useViewModel = () => {
   const [conversionRates, setConversionRates] = useState({ USD: 0, EUR: 0 });
   const [topAddressSearches, setTopAddressSearches] = useState([]);
   const [topTransactionSearches, setTopTransactionSearches] = useState();
+  const [subscribedAddress, setSubscribedAddress] = useState<string>("");
 
   const searchByHash = async (hash: string) => {
     activeTab === "address"
@@ -26,11 +27,32 @@ const useViewModel = () => {
       : setSearchResults(await getTransactionByHash(hash));
   };
 
+  const openSocket = (address: string) => {
+    blockchainSocket.onopen = () => {
+      console.log("onOpen");
+      blockchainSocket.send(
+        JSON.stringify({
+          op: "addr_sub",
+          addr: address,
+        })
+      );
+    };
+  };
   const showToast = (address: string) => {
+    setSubscribedAddress(address);
+    openSocket(address);
     Toast.show({
       type: "success",
       text1: "Confirmed Subscription!",
       text2: `${address}`,
+    });
+  };
+
+  blockchainSocket.onmessage = () => {
+    Toast.show({
+      type: "success",
+      text1: "New Transaction",
+      text2: `${subscribedAddress}`,
     });
   };
 
