@@ -1,5 +1,15 @@
 import { db } from "../../firebase";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  orderBy,
+  query,
+  limit,
+  setDoc,
+  getDoc,
+  DocumentData,
+} from "firebase/firestore";
 
 export const addSearchToFirebase = async (collection: string, hash: string) => {
   const docRef = doc(db, collection, hash);
@@ -18,4 +28,30 @@ export const addSearchToFirebase = async (collection: string, hash: string) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const getTopAddresses = async () => {
+  let top5Addresses = [];
+  const addressesCollectionRef = collection(db, "address");
+  await getDocs(
+    query(addressesCollectionRef, orderBy("searches", "desc"), limit(5))
+  ).then((snapshot) => {
+    snapshot.forEach((doc) => {
+      top5Addresses.push({ data: doc.data(), id: doc.id });
+    });
+  });
+  return await top5Addresses;
+};
+
+export const getTopTransactions = async () => {
+  const transactionsCollectionRef = collection(db, "transaction");
+  let top5Transactions = [];
+  await getDocs(
+    query(transactionsCollectionRef, orderBy("searches", "desc"), limit(5))
+  ).then((snapshot) => {
+    snapshot.forEach((doc) => {
+      top5Transactions.push({ data: doc.data(), id: doc.id });
+    });
+  });
+  return await top5Transactions;
 };
