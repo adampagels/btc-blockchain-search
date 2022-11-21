@@ -3,7 +3,7 @@ import {
   getAddressByHash,
   getTransactionByHash,
 } from "../../../service/dataService";
-import { updateConversionRates } from "../../../helpers/helpers";
+import { updateConversionRates } from "../../../helpers/currencyHelpers";
 import Toast from "react-native-toast-message";
 import {
   getTopAddresses,
