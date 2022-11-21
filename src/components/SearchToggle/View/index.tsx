@@ -1,11 +1,26 @@
-import { Button, View } from "react-native";
+import { View, TouchableOpacity, Text } from "react-native";
 import { SearchToggleProps } from "../types";
+import styles from "../styles";
 
-const SearchToggle = ({ setActiveTab }: SearchToggleProps) => {
+const SearchToggle = ({ activeTab, setActiveTab }: SearchToggleProps) => {
   return (
-    <View>
-      <Button title="address" onPress={() => setActiveTab("address")} />
-      <Button title="transaction" onPress={() => setActiveTab("transaction")} />
+    <View testID="search-toggle" style={styles.toggleContainer}>
+      <TouchableOpacity
+        style={activeTab === "address" && styles.activeToggle}
+        onPress={() => setActiveTab("address")}
+      >
+        <Text style={activeTab !== "address" && styles.inactiveToggle}>
+          address
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={activeTab === "transaction" && styles.activeToggle}
+        onPress={() => setActiveTab("transaction")}
+      >
+        <Text style={activeTab !== "transaction" && styles.inactiveToggle}>
+          transaction
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -1,8 +1,18 @@
 import React from "react";
-import { TextInput, View, Keyboard, Button } from "react-native";
+import {
+  TextInput,
+  View,
+  Text,
+  Keyboard,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 import { SearchInputProps } from "../types";
 import styles from "../styles";
+import globalStyles from "../../../styles/globalStyles";
+import TopSearches from "../../TopSearches/View";
+import { addSearchToFirebase } from "../../../helpers/firebaseHelpers";
 
 const SearchInput = ({
   clicked,
@@ -11,10 +21,16 @@ const SearchInput = ({
   setClicked,
   activeTab,
   searchByHash,
+  topAddressSearches,
+  topTransactionSearches,
 }: SearchInputProps) => {
+  const onSubmit = () => {
+    searchByHash(searchedHash);
+    addSearchToFirebase(activeTab, searchedHash);
+  };
   return (
     <>
-      <View style={styles.container}>
+      <View style={styles.container} testID="search-input">
         <View
           style={
             clicked
@@ -64,12 +80,16 @@ const SearchInput = ({
           </View>
         )}
       </View>
-      <Button
-        title="Search"
-        onPress={() => {
-          searchByHash(searchedHash);
-        }}
-      ></Button>
+      {clicked && (
+        <TopSearches
+          topAddressSearches={topAddressSearches}
+          topTransactionSearches={topTransactionSearches}
+          activeTab={activeTab}
+        />
+      )}
+      <TouchableOpacity style={globalStyles.button} onPress={() => onSubmit()}>
+        <Text style={globalStyles.buttonText}>Search</Text>
+      </TouchableOpacity>
     </>
   );
 };
