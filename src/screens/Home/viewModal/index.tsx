@@ -5,6 +5,21 @@ import {
 } from "../../../service/dataService";
 import { updateConversionRates } from "../../../helpers/helpers";
 import Toast from "react-native-toast-message";
+import { db } from "../../../../firebase";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  orderBy,
+  query,
+  limit,
+  setDoc,
+  FieldValue,
+  getDoc,
+} from "firebase/firestore";
 
 const useViewModel = () => {
   const [searchedHash, setSearchedHash] = useState<string>("");
@@ -13,6 +28,8 @@ const useViewModel = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [currency, setCurrency] = useState<string>("BTC");
   const [conversionRates, setConversionRates] = useState({ USD: 0, EUR: 0 });
+  const [topAddressSearches, setTopAddressSearches] = useState([]);
+  const [topTransactionSearches, setTopTransactionSearches] = useState();
 
   const searchByHash = async (hash: string) => {
     activeTab === "address"
@@ -29,6 +46,41 @@ const useViewModel = () => {
   };
 
   useEffect(() => {
+    const getTopAddresses = async () => {
+      let top5Addresses = [];
+      const addressesCollectionRef = collection(db, "address");
+      await getDocs(
+        query(addressesCollectionRef, orderBy("searches", "desc"), limit(5))
+      ).then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log("address", doc.id);
+          top5Addresses.push({ data: doc.data(), id: doc.id });
+        });
+      });
+      setTopAddressSearches(top5Addresses);
+    };
+
+    const getTopTransactions = async () => {
+      const transactionsCollectionRef = collection(db, "transaction");
+      let top5Transactions = [];
+      await getDocs(
+        query(transactionsCollectionRef, orderBy("searches", "desc"), limit(5))
+      ).then((snapshot) => {
+        snapshot.forEach((doc) => {
+          console.log("trans", doc.id);
+          top5Transactions.push({ data: doc.data(), id: doc.id });
+        });
+      });
+      setTopTransactionSearches(top5Transactions);
+    };
+    if (activeTab === "address") {
+      getTopAddresses();
+    } else {
+      getTopTransactions();
+    }
+  }, [clicked, searchResults]);
+
+  useEffect(() => {
     const getConversionRates = async () => {
       const { USD, EUR } = await updateConversionRates();
       setConversionRates((prevState) => ({
@@ -38,6 +90,8 @@ const useViewModel = () => {
     };
     getConversionRates();
   }, []);
+
+  const shouldShowCard = searchResults.length !== 0;
 
   return {
     clicked,
@@ -53,6 +107,9 @@ const useViewModel = () => {
     setConversionRates,
     conversionRates,
     showToast,
+    shouldShowCard,
+    topAddressSearches,
+    topTransactionSearches,
   };
 };
 
