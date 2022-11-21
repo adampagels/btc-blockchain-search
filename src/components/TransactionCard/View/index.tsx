@@ -37,9 +37,15 @@ const TransactionCard = ({
         <Text>Received at: {receivedTime}</Text>
         <Text>Size: {size} bytes</Text>
         <Text>Confirmations: {confirmations}</Text>
-        <Text>Total BTC input: {inputs_value / 10000000}</Text>
-        <Text>Total BTC output: {outputs_value / 10000000}</Text>
-        <Text>Total fees: {fee / 10000000}</Text>
+        <Text>
+          Total {currency} input: {inputs_value / 10000000}
+        </Text>
+        <Text>
+          Total {currency} output: {outputs_value / 10000000}
+        </Text>
+        <Text>
+          Total fees ({currency}): {fee / 10000000}
+        </Text>
       </View>
     </View>
   );

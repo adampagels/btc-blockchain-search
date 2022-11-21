@@ -34,10 +34,18 @@ const AddressCard = ({
   return (
     <View style={[styles.card, styles.shadowProp]} testID="address-card">
       <View style={styles.card}>
-        <Text>BTC Received: {received / 10000000}</Text>
-        <Text>BTC Sent: {sent / 10000000}</Text>
-        <Text>BTC Unspent: {unspent}</Text>
-        <Text>Balance: {balance / 10000000}</Text>
+        <Text>
+          {currency} Received: {received / 10000000}
+        </Text>
+        <Text>
+          {currency} Sent: {sent / 10000000}
+        </Text>
+        <Text>
+          {currency} Unspent: {unspent}
+        </Text>
+        <Text>
+          Balance({currency}): {balance / 10000000}
+        </Text>
         <TouchableOpacity
           style={styles.button}
           onPress={() => showToast(address)}
