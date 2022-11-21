@@ -35,16 +35,16 @@ const AddressCard = ({
     <View style={[styles.card, styles.shadowProp]} testID="address-card">
       <View style={styles.card}>
         <Text>
-          {currency} Received: {received / 10000000}
+          {currency} Received: {!isNaN(received) && received / 10000000}
         </Text>
         <Text>
-          {currency} Sent: {sent / 10000000}
+          {currency} Sent: {!isNaN(sent) && sent / 10000000}
         </Text>
         <Text>
-          {currency} Unspent: {unspent}
+          {currency} Unspent: {!isNaN(unspent) && unspent}
         </Text>
         <Text>
-          Balance({currency}): {balance / 10000000}
+          Balance({currency}): {!isNaN(balance) && balance / 10000000}
         </Text>
         <TouchableOpacity
           style={styles.button}

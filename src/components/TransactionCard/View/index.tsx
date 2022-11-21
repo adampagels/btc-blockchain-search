@@ -8,7 +8,7 @@ const TransactionCard = ({
   conversionRates,
 }: TransactionCardProps) => {
   let {
-    created_at: receivedTime,
+    created_at,
     size,
     confirmations,
     inputs_value,
@@ -16,6 +16,8 @@ const TransactionCard = ({
     fee,
     hash,
   } = searchResults;
+  const receivedDate =
+    created_at && new Date(created_at * 1000).toLocaleDateString("en-US");
   const { USD, EUR } = conversionRates;
 
   if (currency === "EUR") {
@@ -34,17 +36,19 @@ const TransactionCard = ({
     <View style={[styles.card, styles.shadowProp]} testID="transaction-card">
       <View style={styles.card}>
         <Text>Hash: {hash}</Text>
-        <Text>Received at: {receivedTime}</Text>
-        <Text>Size: {size} bytes</Text>
+        <Text>Received: {receivedDate}</Text>
+        <Text>Size: {size && `${size} bytes`}</Text>
         <Text>Confirmations: {confirmations}</Text>
         <Text>
-          Total {currency} input: {inputs_value / 10000000}
+          Total {currency} input:{" "}
+          {!isNaN(inputs_value) && inputs_value / 10000000}
         </Text>
         <Text>
-          Total {currency} output: {outputs_value / 10000000}
+          Total {currency} output:{" "}
+          {!isNaN(outputs_value) && outputs_value / 10000000}
         </Text>
         <Text>
-          Total fees ({currency}): {fee / 10000000}
+          Total fees ({currency}): {!isNaN(fee) && fee / 10000000}
         </Text>
       </View>
     </View>
