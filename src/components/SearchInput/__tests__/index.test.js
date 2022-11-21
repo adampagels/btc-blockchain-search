@@ -12,4 +12,9 @@ describe("SearchInput", () => {
   it("should be empty initally", () => {
     expect(textInput.props.value).toBe("");
   });
+
+  it("should render Cancel button if clicked is true", () => {
+    render(<SearchInput clicked={true} />);
+    expect(screen.getByText("Cancel"));
+  });
 });

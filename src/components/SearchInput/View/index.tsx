@@ -87,7 +87,11 @@ const SearchInput = ({
           activeTab={activeTab}
         />
       )}
-      <TouchableOpacity style={globalStyles.button} onPress={() => onSubmit()}>
+      <TouchableOpacity
+        testID="search-input-submit-button"
+        style={globalStyles.button}
+        onPress={() => onSubmit()}
+      >
         <Text style={globalStyles.buttonText}>Search</Text>
       </TouchableOpacity>
     </>

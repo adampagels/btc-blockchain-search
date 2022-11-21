@@ -5,4 +5,6 @@ export type SearchInputProps = {
   setClicked: (isClicked: boolean) => Promise<void>;
   activeTab: string;
   searchByHash: (hash: string) => Promise<void>;
+  topAddressSearches: [];
+  topTransactionSearches: [];
 };
