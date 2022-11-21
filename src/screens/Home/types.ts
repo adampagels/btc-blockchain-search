@@ -12,4 +12,7 @@ export type HomeViewProps = {
   conversionRates: {};
   setConversionRates: () => Promise<void>;
   showToast: () => Promise<void>;
+  shouldShowCard: () => boolean;
+  topAddressSearches: [];
+  topTransactionSearches: [];
 };

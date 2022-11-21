@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { SafeAreaView } from "react-native";
 import SearchInput from "../../../components/SearchInput/View";
 import SearchToggle from "../../../components/SearchToggle/View";
 import { HomeViewProps } from "../types";
@@ -19,9 +19,40 @@ const Home = ({
   currency,
   conversionRates,
   showToast,
+  shouldShowCard,
+  topAddressSearches,
+  topTransactionSearches,
 }: HomeViewProps) => {
+  let selectAndCards;
+  if (!shouldShowCard) {
+    null;
+  } else if (activeTab === "address") {
+    selectAndCards = (
+      <>
+        <CurrencySelect setCurrency={setCurrency} currency={currency} />
+        <AddressCard
+          searchResults={searchResults}
+          currency={currency}
+          conversionRates={conversionRates}
+          showToast={showToast}
+        />
+      </>
+    );
+  } else {
+    selectAndCards = (
+      <>
+        <CurrencySelect setCurrency={setCurrency} currency={currency} />
+        <TransactionCard
+          searchResults={searchResults}
+          currency={currency}
+          conversionRates={conversionRates}
+        />
+      </>
+    );
+  }
+
   return (
-    <View>
+    <SafeAreaView>
       <SearchToggle activeTab={activeTab} setActiveTab={setActiveTab} />
       <SearchInput
         searchedHash={searchedHash}
@@ -30,23 +61,11 @@ const Home = ({
         setClicked={setClicked}
         activeTab={activeTab}
         searchByHash={searchByHash}
+        topAddressSearches={topAddressSearches}
+        topTransactionSearches={topTransactionSearches}
       />
-      <CurrencySelect setCurrency={setCurrency} currency={currency} />
-      {activeTab === "address" ? (
-        <AddressCard
-          searchResults={searchResults}
-          currency={currency}
-          conversionRates={conversionRates}
-          showToast={showToast}
-        />
-      ) : (
-        <TransactionCard
-          searchResults={searchResults}
-          currency={currency}
-          conversionRates={conversionRates}
-        />
-      )}
-    </View>
+      {selectAndCards}
+    </SafeAreaView>
   );
 };
 
