@@ -4,7 +4,6 @@ import SearchToggle from "..";
 
 describe("SearchToggle", () => {
   const mockSetActiveTab = jest.fn();
-  // let textInput;
   beforeEach(() => {
     render(
       <SearchToggle activeTab="address" setActiveTab={mockSetActiveTab} />
@@ -19,7 +18,7 @@ describe("SearchToggle", () => {
     expect(transactionButtonToggle);
   });
 
-  it("should register buttons being pressed", () => {
+  it("should change activeTab when pressed", () => {
     const transactionButtonToggle = screen.getByText("transaction");
     fireEvent.press(transactionButtonToggle);
     expect(mockSetActiveTab).toHaveBeenCalled();
