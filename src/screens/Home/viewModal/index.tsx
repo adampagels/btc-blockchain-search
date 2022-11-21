@@ -29,7 +29,6 @@ const useViewModel = ({ blockchainSocket }) => {
 
   const openSocket = (address: string) => {
     blockchainSocket.onopen = () => {
-      console.log("onOpen");
       blockchainSocket.send(
         JSON.stringify({
           op: "addr_sub",
