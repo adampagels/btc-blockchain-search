@@ -15,5 +15,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#032D83",
+    borderRadius: 15,
+    padding: 10,
+    marginBottom: 0,
+    marginHorizontal: 20,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: "white",
+  },
 });
 export default styles;
