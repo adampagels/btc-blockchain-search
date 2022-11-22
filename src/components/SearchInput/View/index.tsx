@@ -57,6 +57,7 @@ const SearchInput = ({
 
           {clicked && (
             <Entypo
+              testID="delete-search-icon"
               name="cross"
               size={20}
               color="black"

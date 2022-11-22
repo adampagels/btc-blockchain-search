@@ -21,13 +21,14 @@ describe("Home", () => {
     await expect(screen.getByTestId("currency-select"));
   });
 
-  it("should render top-searches-container if shouldShowCard and clicked are true", async () => {
+  it("should render top-searches-container if shouldShowCard/clicked are true and activeTab is address", async () => {
     render(
       <View
         shouldShowCard={true}
         searchResults={{}}
         conversionRates={{}}
         clicked={true}
+        activeTab="address"
       />
     );
     await expect(screen.getByTestId("top-searches-container"));

@@ -70,4 +70,50 @@ describe("AddressCard", () => {
     fireEvent.press(subscribeButton);
     expect(mockShowToast).toHaveBeenCalled();
   });
+
+  it("should divide by 10000000 for received amount", () => {
+    render(
+      <AddressCard
+        searchResults={{ received: 10000000 }}
+        conversionRates={{}}
+        currency="USD"
+      />
+    );
+    expect(screen.getByText("USD Received: 1"));
+  });
+
+  it("should divide by 10000000 for sent amount", () => {
+    render(
+      <AddressCard
+        searchResults={{ sent: 10000000 }}
+        conversionRates={{}}
+        currency="USD"
+      />
+    );
+
+    expect(screen.getByText("USD Sent: 1"));
+  });
+
+  it("should divide by 10000000 for unspent amount", () => {
+    render(
+      <AddressCard
+        searchResults={{ unspent_tx_count: 10000000 }}
+        conversionRates={{}}
+        currency="USD"
+      />
+    );
+
+    expect(screen.getByText("USD Unspent: 1"));
+  });
+
+  it("should divide by 10000000 for balance amount", () => {
+    render(
+      <AddressCard
+        searchResults={{ balance: 10000000 }}
+        conversionRates={{}}
+        currency="USD"
+      />
+    );
+    expect(screen.getByText("Balance(USD): 1"));
+  });
 });

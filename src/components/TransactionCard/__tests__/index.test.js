@@ -48,4 +48,60 @@ describe("TransactionCard", () => {
     expect(outputs_value).toEqual(3);
     expect(fee).toEqual(3);
   });
+
+  it("should render a received date if created_at is true", () => {
+    render(
+      <TransactionCard
+        searchResults={{ created_at: 1669115196 }}
+        conversionRates={{}}
+        currency="USD"
+      />
+    );
+    expect(screen.getByText("Received: 11/22/2022"));
+  });
+
+  it("should divide by 10000000 for input amount", () => {
+    render(
+      <TransactionCard
+        searchResults={{ inputs_value: 10000000 }}
+        conversionRates={{}}
+        currency="USD"
+      />
+    );
+
+    expect(screen.getByText("Total USD input: 1"));
+  });
+
+  it("should divide by 10000000 for output amount", () => {
+    render(
+      <TransactionCard
+        searchResults={{ outputs_value: 10000000 }}
+        conversionRates={{}}
+        currency="USD"
+      />
+    );
+    expect(screen.getByText("Total USD output: 1"));
+  });
+
+  it("should divide by 10000000 for fee amount", () => {
+    render(
+      <TransactionCard
+        searchResults={{ fee: 10000000 }}
+        conversionRates={{}}
+        currency="USD"
+      />
+    );
+    expect(screen.getByText("Total fees (USD): 1"));
+  });
+
+  it("should show size if size is true", () => {
+    render(
+      <TransactionCard
+        searchResults={{ size: 200 }}
+        conversionRates={{}}
+        currency="USD"
+      />
+    );
+    expect(screen.getByText("Size: 200 bytes"));
+  });
 });
