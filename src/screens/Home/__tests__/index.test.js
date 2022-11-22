@@ -3,30 +3,33 @@ import View from "../View/index";
 
 describe("Home", () => {
   beforeEach(async () => {
-    render(<View shouldShowCard={false} />);
+    render(<View />);
   });
 
   it("should render SearchToggle", () => {
-    expect(screen.findByTestId("search-toggle"));
+    expect(screen.getByTestId("search-toggle"));
   });
 
   it("should render SearchInput", async () => {
-    await expect(screen.findByTestId("search-input"));
+    await expect(screen.getByTestId("search-input"));
   });
 
-  it("should render CurrencySelect", async () => {
-    await expect(screen.findByTestId("currency-select"));
+  it("should render CurrencySelect if shouldShowCard is true", async () => {
+    render(
+      <View shouldShowCard={true} searchResults={{}} conversionRates={{}} />
+    );
+    await expect(screen.getByTestId("currency-select"));
   });
 
-  it("should render AddressCard ", async () => {
-    await expect(screen.findByTestId("address-card"));
-  });
-
-  it("should render TransactionCard if shouldShowCard", async () => {
-    await expect(screen.findByTestId("transaction-card"));
-  });
-
-  it("should render TopSearches", async () => {
-    await expect(screen.findByTestId("top-searches-container"));
+  it("should render top-searches-container if shouldShowCard and clicked are true", async () => {
+    render(
+      <View
+        shouldShowCard={true}
+        searchResults={{}}
+        conversionRates={{}}
+        clicked={true}
+      />
+    );
+    await expect(screen.getByTestId("top-searches-container"));
   });
 });
