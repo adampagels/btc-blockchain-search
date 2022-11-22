@@ -18,10 +18,6 @@ const TransactionCard = ({
   } = searchResults;
   const { USD, EUR } = conversionRates;
 
-  const inputAmount = !isNaN(inputs_value) && inputs_value / 10000000;
-  const outputAmount = !isNaN(outputs_value) && outputs_value / 10000000;
-  const feeAmount = !isNaN(fee) && fee / 10000000;
-  const sizeInBytes = size && `${size} bytes`;
   const receivedDate =
     created_at && new Date(created_at * 1000).toLocaleDateString("en-US");
 
@@ -42,16 +38,18 @@ const TransactionCard = ({
       <View style={styles.card}>
         <Text>Hash: {hash}</Text>
         <Text>Received: {receivedDate}</Text>
-        <Text>Size: {sizeInBytes}</Text>
+        <Text>Size: {size && `${size} bytes`}</Text>
         <Text>Confirmations: {confirmations}</Text>
         <Text>
-          Total {currency} input: {inputAmount}
+          Total {currency} input:{" "}
+          {!isNaN(inputs_value) && inputs_value / 10000000}
         </Text>
         <Text>
-          Total {currency} output: {outputAmount}
+          Total {currency} output:{" "}
+          {!isNaN(outputs_value) && outputs_value / 10000000}
         </Text>
         <Text>
-          Total fees ({currency}): {feeAmount}
+          Total fees ({currency}): {!isNaN(fee) && fee / 10000000}
         </Text>
       </View>
     </View>

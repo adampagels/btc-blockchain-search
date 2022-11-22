@@ -17,11 +17,6 @@ const AddressCard = ({
   } = searchResults;
   const { USD, EUR } = conversionRates;
 
-  const receivedAmount = !isNaN(received) && received / 10000000;
-  const sentAmount = !isNaN(sent) && sent / 10000000;
-  const unspentAmount = !isNaN(unspent) && unspent / 10000000;
-  const balanceAmount = !isNaN(balance) && balance / 10000000;
-
   if (currency === "EUR") {
     received *= EUR;
     sent *= EUR;
@@ -40,16 +35,16 @@ const AddressCard = ({
     <View style={[styles.card, styles.shadowProp]} testID="address-card">
       <View style={styles.card}>
         <Text>
-          {currency} Received: {receivedAmount}
+          {currency} Received: {!isNaN(received) && received / 10000000}
         </Text>
         <Text>
-          {currency} Sent: {sentAmount}
+          {currency} Sent: {!isNaN(sent) && sent / 10000000}
         </Text>
         <Text>
-          {currency} Unspent: {unspentAmount}
+          {currency} Unspent: {!isNaN(unspent) && unspent}
         </Text>
         <Text>
-          Balance({currency}): {balanceAmount}
+          Balance({currency}): {!isNaN(balance) && balance / 10000000}
         </Text>
         <TouchableOpacity
           style={styles.button}
