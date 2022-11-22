@@ -32,4 +32,15 @@ describe("Home", () => {
     );
     await expect(screen.getByTestId("top-searches-container"));
   });
+  it("should render top-searches-container if shouldShowCard is true and activeTab is transaction", async () => {
+    render(
+      <View
+        shouldShowCard={true}
+        searchResults={{}}
+        conversionRates={{}}
+        activeTab="transaction"
+      />
+    );
+    await expect(screen.getByTestId("transaction-card"));
+  });
 });
