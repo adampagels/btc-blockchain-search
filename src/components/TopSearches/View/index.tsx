@@ -24,6 +24,7 @@ const TopSearches = ({
     <View testID="top-searches-container" style={styles.searchContainer}>
       <Text style={{ textAlign: "center" }}>Most searches by {activeTab}</Text>
       <FlatList
+        testID="top-searches-flatlist"
         data={
           activeTab === "address" ? topAddressSearches : topTransactionSearches
         }
