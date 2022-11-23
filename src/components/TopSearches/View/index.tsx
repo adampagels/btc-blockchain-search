@@ -7,15 +7,15 @@ const TopSearches = ({
   activeTab,
   topTransactionSearches,
 }: any) => {
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item: hash }) => {
     return (
       <View testID="search-item-container" style={styles.searchItemContainer}>
         <Text numberOfLines={1} style={styles.searchItemHash}>
-          {item.id}
+          {hash.id}
         </Text>
         <Text style={styles.searchItemNumberOfTimes}>
-          Searched {item.data.searches}
-          {item.data.searches === 1 ? " time" : " times"}
+          Searched {hash.data.searches}
+          {hash.data.searches === 1 ? " time" : " times"}
         </Text>
       </View>
     );
