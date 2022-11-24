@@ -5,6 +5,7 @@ import { HomeViewProps } from "../types";
 import AddressCard from "../../../components/AddressCard/View";
 import TransactionCard from "../../../components/TransactionCard/View";
 import CurrencySelect from "../../../components/CurrencySelect/View";
+import Loader from "../../../components/Loader/View";
 
 const Home = ({
   searchedHash,
@@ -23,6 +24,7 @@ const Home = ({
   topAddressSearches,
   topTransactionSearches,
   searchError,
+  isLoading,
 }: HomeViewProps) => {
   let selectAndCards;
   if (!shouldShowCard || searchError) {
@@ -66,7 +68,7 @@ const Home = ({
         topTransactionSearches={topTransactionSearches}
         searchError={searchError}
       />
-      {selectAndCards}
+      {!isLoading ? selectAndCards : <Loader />}
     </SafeAreaView>
   );
 };

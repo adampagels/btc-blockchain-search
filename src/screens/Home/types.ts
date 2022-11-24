@@ -16,4 +16,5 @@ export type HomeViewProps = {
   topAddressSearches: [];
   topTransactionSearches: [];
   searchError: {};
+  isLoading: boolean;
 };
