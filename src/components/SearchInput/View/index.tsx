@@ -83,7 +83,9 @@ const SearchInput = ({
         )}
       </View>
       {searchError && (
-        <Text style={styles.searchError}> {searchError.error}</Text>
+        <Text testID="search-error-message" style={styles.searchError}>
+          {searchError.error}
+        </Text>
       )}
       {clicked && (
         <TopSearches

@@ -31,4 +31,13 @@ describe("SearchInput", () => {
     fireEvent.press(deleteButton);
     expect(mockSetSearchedHash).toHaveBeenCalled();
   });
+
+  it("should render an error message if errorMessage is true", () => {
+    render(
+      <SearchInput
+        searchError={{ error: "this could not be found. Please try again" }}
+      />
+    );
+    expect(screen.getByTestId("search-error-message").toBeTruthy());
+  });
 });
