@@ -44,4 +44,9 @@ describe("Home", () => {
     );
     await expect(screen.getByTestId("transaction-card"));
   });
+
+  it("should render Loader if isLoading is true", async () => {
+    render(<View isLoading={true} />);
+    await expect(screen.getByTestId("loader-container"));
+  });
 });
