@@ -7,4 +7,5 @@ export type SearchInputProps = {
   searchByHash: (hash: string) => Promise<void>;
   topAddressSearches: [];
   topTransactionSearches: [];
+  searchError: {};
 };

@@ -20,11 +20,26 @@ const useViewModel = ({ blockchainSocket }) => {
   const [topAddressSearches, setTopAddressSearches] = useState([]);
   const [topTransactionSearches, setTopTransactionSearches] = useState();
   const [subscribedAddress, setSubscribedAddress] = useState<string>("");
+  const [searchError, setSearchError] = useState({});
 
   const searchByHash = async (hash: string) => {
-    activeTab === "address"
-      ? setSearchResults(await getAddressByHash(hash))
-      : setSearchResults(await getTransactionByHash(hash));
+    if (activeTab === "address") {
+      const addressSearchResult = await getAddressByHash(hash);
+      if (addressSearchResult.error) {
+        return setSearchError(addressSearchResult);
+      } else {
+        setSearchResults(addressSearchResult);
+        setSearchError(null);
+      }
+    } else {
+      const transactionSearchResult = await getTransactionByHash(hash);
+      if (transactionSearchResult.error) {
+        return setSearchError(transactionSearchResult);
+      } else {
+        setSearchResults(transactionSearchResult);
+        setSearchError(null);
+      }
+    }
   };
 
   const openSocket = (address: string) => {
@@ -98,6 +113,7 @@ const useViewModel = ({ blockchainSocket }) => {
     shouldShowCard,
     topAddressSearches,
     topTransactionSearches,
+    searchError,
   };
 };
 

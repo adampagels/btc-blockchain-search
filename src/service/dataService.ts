@@ -9,7 +9,7 @@ export const getAddressByHash = async (hashAddress: string) => {
       typeof addressResponse.data === "string" &&
       addressResponse.data.includes("invalid")
     ) {
-      return [];
+      return { error: "This address could not be found. Please try again" };
     }
     return addressResponse.data;
   } catch (error: any) {
@@ -28,7 +28,7 @@ export const getTransactionByHash = async (hashTransaction: string) => {
       typeof transactionResponse.data === "string" &&
       transactionResponse.data.includes("invalid")
     ) {
-      return [];
+      return { error: "This transaction could not be found. Please try again" };
     }
     return transactionResponse.data;
   } catch (error: any) {

@@ -15,4 +15,5 @@ export type HomeViewProps = {
   shouldShowCard: () => boolean;
   topAddressSearches: [];
   topTransactionSearches: [];
+  searchError: {};
 };

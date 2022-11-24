@@ -22,9 +22,10 @@ const Home = ({
   shouldShowCard,
   topAddressSearches,
   topTransactionSearches,
+  searchError,
 }: HomeViewProps) => {
   let selectAndCards;
-  if (!shouldShowCard) {
+  if (!shouldShowCard || searchError) {
     null;
   } else if (activeTab === "address") {
     selectAndCards = (
@@ -63,6 +64,7 @@ const Home = ({
         searchByHash={searchByHash}
         topAddressSearches={topAddressSearches}
         topTransactionSearches={topTransactionSearches}
+        searchError={searchError}
       />
       {selectAndCards}
     </SafeAreaView>

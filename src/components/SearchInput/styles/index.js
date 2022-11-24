@@ -30,6 +30,11 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     width: "90%",
   },
+  searchError: {
+    color: "red",
+    textAlign: "center",
+    marginBottom: 10,
+  },
 });
 
 export default styles;

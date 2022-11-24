@@ -23,6 +23,7 @@ const SearchInput = ({
   searchByHash,
   topAddressSearches,
   topTransactionSearches,
+  searchError,
 }: SearchInputProps) => {
   const onSubmit = () => {
     searchByHash(searchedHash);
@@ -81,6 +82,9 @@ const SearchInput = ({
           </View>
         )}
       </View>
+      {searchError && (
+        <Text style={styles.searchError}> {searchError.error}</Text>
+      )}
       {clicked && (
         <TopSearches
           topAddressSearches={topAddressSearches}
