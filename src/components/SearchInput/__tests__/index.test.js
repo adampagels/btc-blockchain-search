@@ -3,29 +3,34 @@ import { render, screen, fireEvent } from "@testing-library/react-native";
 import SearchInput from "..";
 
 describe("SearchInput", () => {
-  let textInput;
   const mockSetSearchedHash = jest.fn();
   const mockSetClicked = jest.fn();
+  const mockSearchByHash = jest.fn();
   beforeEach(() => {
-    render(<SearchInput />);
-    textInput = screen.getByTestId("address-transaction-search");
+    render(
+      <SearchInput
+        clicked={true}
+        setClicked={mockSetClicked}
+        setSearchedHash={mockSetSearchedHash}
+        searchByHash={mockSearchByHash}
+        searchError={{ error: "this could not be found. Please try again" }}
+      />
+    );
   });
 
   it("should be empty initally", () => {
-    expect(textInput.props.value).toBe("");
+    expect(screen.getByTestId("address-transaction-search").props.value).toBe(
+      ""
+    );
   });
 
   it("should render cancel button if clicked is true and setClicked should be called onPress", () => {
-    render(<SearchInput clicked={true} setClicked={mockSetClicked} />);
     const cancelButton = screen.getByText("Cancel");
     fireEvent.press(cancelButton);
     expect(mockSetClicked).toHaveBeenCalled();
   });
 
   it("should render delete icon if clicked is true and setSearchedHash should be called onPress", () => {
-    render(
-      <SearchInput clicked={true} setSearchedHash={mockSetSearchedHash} />
-    );
     const deleteButton = screen.getByTestId("delete-search-icon");
 
     fireEvent.press(deleteButton);
@@ -33,11 +38,13 @@ describe("SearchInput", () => {
   });
 
   it("should render an error message if errorMessage is true", () => {
-    render(
-      <SearchInput
-        searchError={{ error: "this could not be found. Please try again" }}
-      />
-    );
-    expect(screen.getByTestId("search-error-message").toBeTruthy());
+    expect(screen.getByTestId("search-error-message"));
+  });
+
+  it("should call searchByHash function when submit button is pressed", async () => {
+    const submitButton = await screen.getByTestId("search-input-submit-button");
+
+    fireEvent.press(submitButton);
+    expect(mockSearchByHash).toHaveBeenCalled();
   });
 });
