@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react-native";
 import Loader from "..";
 
-describe("SearchInput", () => {
+describe("Loader", () => {
   beforeEach(() => {
     render(<Loader />);
   });
