@@ -31,7 +31,7 @@ export const addSearchToFirebase = async (collection: string, hash: string) => {
 };
 
 export const getTopAddresses = async () => {
-  let top5Addresses = [];
+  let top5Addresses: { data: DocumentData; id: string }[] = [];
   const addressesCollectionRef = collection(db, "address");
   await getDocs(
     query(addressesCollectionRef, orderBy("searches", "desc"), limit(5))
@@ -45,7 +45,7 @@ export const getTopAddresses = async () => {
 
 export const getTopTransactions = async () => {
   const transactionsCollectionRef = collection(db, "transaction");
-  let top5Transactions = [];
+  let top5Transactions: { data: DocumentData; id: string }[] = [];
   await getDocs(
     query(transactionsCollectionRef, orderBy("searches", "desc"), limit(5))
   ).then((snapshot) => {
